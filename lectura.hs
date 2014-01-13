@@ -37,3 +37,15 @@ getvalue xs = [takeWhile (/= ',') xs, takeWhile (/= ',') (dropWhile (/=',') xs),
 guardarDev :: [String, String, String]  -> Device	
 guardarDev [] = "vacia"
 guardarDev (a,b,c) = Device { id1 = a, user = b, fallback = c}
+
+split :: Eq a => [a] -> [a] -> [[a]]
+split _ [] = []
+split delim str =
+    let (firstline, remainder) = breakList (startswith delim) str
+        in 
+        firstline : case remainder of
+                                   [] -> []
+                                   x -> if x == delim
+                                        then [] : []
+                                        else split delim 
+                                                 (drop (length delim) x)
