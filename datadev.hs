@@ -1,4 +1,9 @@
+import System.IO.Unsafe 
 
+
+--Lectura del archivo y obteniendo su contendido en un dato
+info = unsafePerformIO . readFile $ "file.txt"
+--info tiene toda la informacion del archivo
 
 data Devices = Devices {dispositivos :: [Device]} deriving (Show)
 
